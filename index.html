@@ -10,14 +10,14 @@
     <style>
         /* === BASIC SETUP === */
         :root {
-            --neon: #ffffff; /* Main White Glow */
-            --darkbg: #030303; /* Deepest Black */
-            --accent: #2c2c2c; /* Subtle Gray */
-            --glass: rgba(255, 255, 255, 0.03); /* Ulta-thin Glass */
-            --shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Glowing Shadow */
+            --neon: #ffffff; 
+            --darkbg: #030303; 
+            --accent: #2c2c2c; 
+            --glass: rgba(255, 255, 255, 0.03); 
+            --shadow: 0 0 15px rgba(255, 255, 255, 0.5); 
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; cursor: none; /* Custom Cursor */ }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; cursor: none; }
         body { background-color: var(--darkbg); color: var(--neon); overflow: hidden; height: 100vh; position: relative; }
         a { text-decoration: none; color: inherit; }
         button { border: none; background: transparent; cursor: pointer; }
@@ -25,7 +25,7 @@
         /* === PRELOADER / INTRO === */
         #intro { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease-out; }
         #intro.fade-out { opacity: 0; pointer-events: none; }
-        .intro-text { font-size: 3rem; font-weight: 800; text-transform: uppercase; letter-spacing: 5px; color: #111; animation: glitch 2s infinite; margin-bottom: 20px; }
+        .intro-text { font-size: 3rem; font-weight: 800; text-transform: uppercase; letter-spacing: 5px; color: #111; animation: glitch 2s infinite; margin-bottom: 20px; text-align: center;}
         .click-me-btn { padding: 18px 45px; border: 2px solid var(--neon); color: var(--neon); font-size: 1.3rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; box-shadow: var(--shadow); position: relative; overflow: hidden; transition: 0.3s; }
         .click-me-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: 0.5s; }
         .click-me-btn:hover { background: var(--neon); color: #000; }
@@ -44,11 +44,10 @@
         .v-lines { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
         .v-lines span { position: absolute; top: -100%; width: 1px; height: 100vh; background: linear-gradient(to bottom, transparent, var(--neon)); animation: fall linear infinite; }
         @keyframes fall { to { transform: translateY(200vh); } }
-        /* Creating multiple lines with different properties via pseudo-elements is hard in single file, so we'll use JS for this */
 
         /* === MAIN CONTENT === */
-        #main-content { display: none; padding: 20px; opacity: 0; transition: opacity 1s ease-in; position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; overflow-y: auto; align-items: center; scrollbar-width: none; /* Hide scrollbar Firefox */ }
-        #main-content::-webkit-scrollbar { display: none; /* Hide scrollbar Chrome/Safari */ }
+        #main-content { display: none; padding: 20px; opacity: 0; transition: opacity 1s ease-in; position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; overflow-y: auto; align-items: center; scrollbar-width: none; }
+        #main-content::-webkit-scrollbar { display: none; }
 
         /* === HEADER === */
         header { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; padding: 30px 0; position: sticky; top: 0; background: linear-gradient(to bottom, var(--darkbg) 60%, transparent); z-index: 100; }
@@ -61,7 +60,7 @@
         .nav-btn:hover { color: #000; border-color: var(--neon); box-shadow: var(--shadow); }
         .nav-btn:hover::after { opacity: 1; }
 
-        /* === PROFILE CARD (Advanced Glassmorphism) === */
+        /* === PROFILE CARD === */
         .glass-card { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 50px; width: 100%; max-width: 600px; text-align: center; margin: 40px 0; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.6s ease, box-shadow 0.6s ease; }
         .glass-card:hover { transform: translateY(0) scale(1.02); box-shadow: 0 15px 50px rgba(0,0,0,0.7), 0 0 15px rgba(255,255,255,0.1); }
         .glass-card::before { content: ''; position: absolute; inset: 0; border-radius: 30px; padding: 2px; background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent 50%, rgba(255,255,255,0.2)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
@@ -82,7 +81,7 @@
         .about-text { font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.7); margin-bottom: 40px; text-align: justify; padding: 0 20px; position: relative; }
         .about-text::before { content: '“'; position: absolute; left: -10px; top: -10px; font-size: 3rem; color: rgba(255,255,255,0.1); font-family: serif; }
 
-        /* === SOCIAL BUTTONS (Ultra Glow) === */
+        /* === SOCIAL BUTTONS === */
         .social-container { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; }
         .social-btn { width: 60px; height: 60px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--neon); font-size: 1.5rem; transition: 0.4s; position: relative; }
         .social-btn::before { content: ''; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon); opacity: 0; transition: 0.4s; }
@@ -137,21 +136,20 @@
     </div>
 
     <canvas id="bg-canvas"></canvas>
-    <div class="v-lines" id="v-lines">
-        </div>
+    <div class="v-lines" id="v-lines"></div>
 
     <div id="main-content">
         <header>
             <div class="logo">未知 RONAK</div>
             <div class="nav-links">
                 <a href="#" class="nav-btn">Home</a>
-                <a href="https://t.me/ronakgupta321" target="_blank" class="nav-btn">Channel</a>
+                <a href="https://t.me/MusicXUpdate" target="_blank" class="nav-btn">Channel</a>
             </div>
         </header>
 
         <section class="glass-card">
             <div class="profile-img-container">
-                <img src="https://api.dicebear.com/8.x/notionists-neutral/svg?seed=ronak&backgroundColor=030303&frameColor=ffffff" alt="Ronak Gupta" class="profile-img">
+                <img src="https://files.catbox.moe/g83rfx.webp" alt="Ronak Gupta" class="profile-img">
             </div>
             
             <h1>Hi, I'm Ronak</h1>
@@ -169,11 +167,11 @@
                     <i class="fa-brands fa-telegram"></i>
                     <span>Telegram</span>
                 </a>
-                <a href="https://youtube.com/@your_channel" target="_blank" class="social-btn">
+                <a href="https://youtube.com/@Doreamonfanslovers" target="_blank" class="social-btn">
                     <i class="fa-brands fa-youtube"></i>
                     <span>YouTube</span>
                 </a>
-                <a href="https://instagram.com/your_username" target="_blank" class="social-btn">
+                <a href="https://instagram.com/ronakgupta101" target="_blank" class="social-btn">
                     <i class="fa-brands fa-instagram"></i>
                     <span>Instagram</span>
                 </a>
@@ -189,17 +187,17 @@
         </section>
 
         <footer>
-            <p>© 2025 未知 Ronak Gupta. All Rights Reserved.</p>
+            <p>© 2026 未知 Ronak Gupta. All Rights Reserved.</p>
             <p class="foot-username">@ronakgupta321</p>
         </footer>
     </div>
 
     <audio id="bg-music" loop preload="auto">
-        <source src="music.mp3" type="audio/mpeg">
+        <source src="https://files.catbox.moe/dameo1.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // === CONFIGURATION ===
+        // JS Configuration
         const roles = [
             "Web Developer",
             "UI/UX Designer",
@@ -207,11 +205,10 @@
             "Telegram Bot Developer",
             "JavaScript Developer"
         ];
-        const typingSpeed = 100; // ms per char
-        const erasingSpeed = 50; // ms per char
-        const newTextDelay = 2000; // ms before typing next role
+        const typingSpeed = 100; 
+        const erasingSpeed = 50; 
+        const newTextDelay = 2000; 
         
-        // === DOM ELEMENTS ===
         const intro = document.getElementById('intro');
         const mainContent = document.getElementById('main-content');
         const bgMusic = document.getElementById('bg-music');
@@ -222,40 +219,28 @@
         const cursorDot = document.getElementById('cursor-dot');
         const cursorOutline = document.getElementById('cursor-outline');
         
-        // === STATE ===
         let roleIndex = 0;
         let charIndex = 0;
         let isMusicPlaying = false;
 
-        // === INITIALIZATION ===
         window.addEventListener('load', () => {
-            // Setup Vertical Lines
             createVerticalLines(30);
-            // Setup Background Canvas Particles
             initParticleBackground();
-            // Setup Custom Cursor
             initCustomCursor();
         });
 
-        // === FUNCTIONS ===
-
-        // 1. Start Portfolio (Intro Click)
         function startPortfolio() {
             intro.classList.add('fade-out');
             setTimeout(() => {
                 intro.style.display = 'none';
                 mainContent.style.display = 'flex';
-                // Trigger opacity animation
                 requestAnimationFrame(() => mainContent.style.opacity = '1');
                 
-                // Play Music
                 playMusic();
-                // Start Typing Animation
                 setTimeout(typeRole, newTextDelay / 2);
             }, 800);
         }
 
-        // 2. Music Control
         function playMusic() {
             bgMusic.play().then(() => {
                 isMusicPlaying = true;
@@ -288,7 +273,6 @@
             }
         }
 
-        // 3. Typing Animation
         function typeRole() {
             if (charIndex < roles[roleIndex].length) {
                 typingRole.textContent += roles[roleIndex].charAt(charIndex);
@@ -310,19 +294,17 @@
             }
         }
 
-        // 4. Vertical Falling Lines Effect
         function createVerticalLines(count) {
             for (let i = 0; i < count; i++) {
                 const line = document.createElement('span');
                 line.style.left = Math.random() * 100 + 'vw';
-                line.style.animationDuration = (Math.random() * 3 + 2) + 's'; // 2s to 5s
+                line.style.animationDuration = (Math.random() * 3 + 2) + 's'; 
                 line.style.animationDelay = Math.random() * 5 + 's';
-                line.style.opacity = Math.random() * 0.5 + 0.1; // 0.1 to 0.6 opacity
+                line.style.opacity = Math.random() * 0.5 + 0.1; 
                 vLinesContainer.appendChild(line);
             }
         }
 
-        // 5. Advanced Particle Background (Canvas)
         function initParticleBackground() {
             const canvas = document.getElementById('bg-canvas');
             const ctx = canvas.getContext('2d');
@@ -363,7 +345,7 @@
             }
 
             const createParticles = () => {
-                const particleCount = Math.floor((width * height) / 15000); // Dynamic count based on screen size
+                const particleCount = Math.floor((width * height) / 15000); 
                 particles = [];
                 for (let i = 0; i < particleCount; i++) {
                     particles.push(new Particle());
@@ -404,24 +386,20 @@
             animate();
         }
 
-        // 6. Custom Cursor Interaction
         function initCustomCursor() {
             window.addEventListener('mousemove', (e) => {
                 const posX = e.clientX;
                 const posY = e.clientY;
                 
-                // Direct movement for dot
                 cursorDot.style.left = posX + 'px';
                 cursorDot.style.top = posY + 'px';
                 
-                // Delayed smooth movement for outline
                 cursorOutline.animate({
                     left: posX + 'px',
                     top: posY + 'px'
                 }, { duration: 500, fill: "forwards" });
             });
             
-            // Hover scaling effect for interactive elements
             const interactables = document.querySelectorAll('a, button, .profile-img-container');
             interactables.forEach(el => {
                 el.addEventListener('mouseenter', () => {
